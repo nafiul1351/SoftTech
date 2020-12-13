@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        return view('user.home');
     }
 
     public function sellerindex()
@@ -34,5 +35,11 @@ class HomeController extends Controller
     public function notapprovedsellerindex()
     {
         return view('seller.not_approved_home');
+    }
+
+    public function adminindex()
+    {
+        $seller=User::where('approved', '0')->get();
+        return view('admin.home', compact('seller'));
     }
 }

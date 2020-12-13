@@ -1,19 +1,19 @@
-@extends('admin.layouts.app')
+@extends('user.layouts.app')
 @section('content')
     <div class="container-scroller">
 
         <!-- Navbar -->
-        @include('admin.partials.navbar')
+        @include('user.partials.navbar')
 
         <div class="container-fluid page-body-wrapper">
             <div class="row row-offcanvas row-offcanvas-right">
 
                 <!-- Sidebar -->
-                @include('admin.partials.sidebar', ['seller' => $seller])
+                @include('user.partials.sidebar')
 
                     <!-- Main -->
                     <div class="content-wrapper">
-                        <h1 style="text-align: center;" class="page-title">{{ __('Admin Dashboard') }}</h1>
+                        <h1 style="text-align: center;" class="page-title">{{ __('Buyer Dashboard') }}</h1>
                         <div class="card">
                             <div class="card-body">
                                 <h2 style="text-align: center;" class="card-title">{{ __('Instructions') }}</h2>
@@ -29,7 +29,7 @@
                     </div>
 
                 <!-- Footer -->
-                @include('admin.partials.footer')
+                @include('user.partials.footer')
         
             </div>
         </div>

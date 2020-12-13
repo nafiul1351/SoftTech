@@ -22,7 +22,7 @@ Auth::routes(['verify' => true]);
 Route::middleware(['auth','verified'])->group(function () {
 
 	Route::middleware(['admin'])->group(function () {
-		Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+		Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminindex'])->name('admin.home');
 
 		Route::get('/add/brand', [App\Http\Controllers\AdminController::class, 'addbrand'])->name('add.brand');
 		Route::post('/add/brand', [App\Http\Controllers\AdminController::class, 'storebrand'])->name('add.brand');
@@ -64,5 +64,9 @@ Route::middleware(['auth','verified'])->group(function () {
 			Route::post('/update/product/{id}', [App\Http\Controllers\SellerController::class, 'updateproduct']);
 			Route::get('/delete/product/{id}', [App\Http\Controllers\SellerController::class, 'deleteproduct']);
 		});
+	});
+
+	Route::middleware(['buyer'])->group(function () {
+		Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('buyer.home');
 	});
 });
