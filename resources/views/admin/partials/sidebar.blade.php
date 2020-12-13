@@ -61,7 +61,7 @@
                         <a class="nav-link" href="{{ route('approve.seller') }}">
                             {{ __('Approve Sellers') }}
                             @if($seller->count() > 0)
-                                <span style="margin-left: 5px; text-align: center; border-radius: 5px; width: 20px; height: 20px;" class="count bg-danger" id="notbad">
+                                <span style="margin-left: 5px; text-align: center; border-radius: 5px; width: 20px; height: 20px;" class="count bg-danger">
                                     {{ $seller->count() }}
                                 </span>
                             @endif
