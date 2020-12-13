@@ -9,7 +9,7 @@
             <div class="row row-offcanvas row-offcanvas-right">
 
                 <!-- Sidebar -->
-                @include('admin.partials.sidebar', ['seller' => $seller])
+                @include('admin.partials.sidebar')
 
                     <!-- Main -->
                     <div class="content-wrapper">

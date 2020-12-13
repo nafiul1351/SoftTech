@@ -11,8 +11,7 @@ class AdminController extends Controller
 {
     public function addbrand()
     {
-        $seller=User::where('approved', '0')->get();
-        return view('admin.brand.add_brand', compact('seller'));
+        return view('admin.brand.add_brand');
     }
 
     public function storebrand(Request $request){
@@ -36,14 +35,12 @@ class AdminController extends Controller
     public function allbrand()
     {
         $brand=Brand::all();
-        $seller=User::where('approved', '0')->get();
-        return view('admin.brand.all_brand', compact('brand', 'seller'));
+        return view('admin.brand.all_brand', compact('brand'));
     }
 
     public function editbrand($id){
         $brand = Brand::findorfail($id);
-        $seller=User::where('approved', '0')->get();
-        return view('admin.brand.edit_brand', compact('brand', 'seller'));
+        return view('admin.brand.edit_brand', compact('brand'));
     }
 
     public function updatebrand(Request $request, $id){
@@ -77,8 +74,7 @@ class AdminController extends Controller
 
     public function addcategory()
     {
-        $seller=User::where('approved', '0')->get();
-        return view('admin.category.add_category', compact('seller'));
+        return view('admin.category.add_category');
     }
 
     public function storecategory(Request $request){
@@ -102,14 +98,12 @@ class AdminController extends Controller
     public function allcategory()
     {
         $category=Category::all();
-        $seller=User::where('approved', '0')->get();
-        return view('admin.category.all_category', compact('category', 'seller'));
+        return view('admin.category.all_category', compact('category'));
     }
 
     public function editcategory($id){
         $category = Category::findorfail($id);
-        $seller=User::where('approved', '0')->get();
-        return view('admin.category.edit_category', compact('category', 'seller'));
+        return view('admin.category.edit_category', compact('category'));
     }
 
     public function updatecategory(Request $request, $id){
@@ -163,8 +157,7 @@ class AdminController extends Controller
     public function allseller()
     {
         $seller=User::where('type', 'seller')->where('approved', '1')->get();
-        $not_approved_seller=User::where('approved', '0')->get();
-        return view('admin.seller.all_seller', compact('seller', 'not_approved_seller'));
+        return view('admin.seller.all_seller', compact('seller'));
     }
 
     public function suspendseller($id)

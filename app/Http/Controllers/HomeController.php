@@ -39,7 +39,6 @@ class HomeController extends Controller
 
     public function adminindex()
     {
-        $seller=User::where('approved', '0')->get();
-        return view('admin.home', compact('seller'));
+        return view('admin.home');
     }
 }

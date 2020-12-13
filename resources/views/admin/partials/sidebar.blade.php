@@ -58,14 +58,7 @@
             <div class="collapse" id="seller">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('approve.seller') }}">
-                            {{ __('Approve Sellers') }}
-                            @if($seller->count() > 0)
-                                <span style="margin-left: 5px; text-align: center; border-radius: 5px; width: 20px; height: 20px;" class="count bg-danger">
-                                    {{ $seller->count() }}
-                                </span>
-                            @endif
-                        </a>
+                        <a class="nav-link" href="{{ route('approve.seller') }}">{{ __('Approve Sellers') }}<span style="margin-left: 5px; text-align: center; border-radius: 5px; width: 20px; height: 20px;" class="count bg-danger" id="noti_number"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('all.seller') }}">{{ __('Sellers') }}</a>
@@ -75,3 +68,12 @@
         </li>
     </ul>
 </nav>
+
+<script type="text/javascript">
+    function loadDoc() {
+        setInterval(function(){
+            $('#noti_number').load('/noti_number.php');
+      },1000);
+    }
+    loadDoc();
+</script>
