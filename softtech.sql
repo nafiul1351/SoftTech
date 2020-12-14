@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2020 at 04:38 PM
+-- Generation Time: Dec 14, 2020 at 05:15 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -224,8 +224,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `gender`, `dob`, `email`, `phonenumber`, `image`, `type`, `approved`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Nafiul', 'Islam', 'male', '1995-10-09', 'nafiul1351@gmail.com', '01953806556', 'public/images/users/images/1685705951677678.jpg', 'Admin', 1, '2020-12-10 09:34:51', '$2y$10$3SuBjqYairwUZ8pAa26Xve6xHMdAdzwzHOKs35unsccubvMqGdJLG', '8OXn83KRAKMo8wbfjFdIKY7ahxo3v0VEEvAIXq1R9tkJOXSLRVz5nXKBkfMP', '2020-12-10 09:34:31', '2020-12-12 09:19:57'),
-(2, 'Sadia', 'Afrin', 'female', '1998-01-01', 'afrin.akter113@gmail.com', '01992775545', 'public/images/users/images/1685706160032343.jpg', 'Seller', 1, '2020-12-10 09:38:13', '$2y$10$b5Ot/xsm3OIU7I6poiNYveX2tqqi0eSPXAdzQ8NLhhOw2J8m7UR5q', '70FuwxkknPDSAMyDkoAc9FtTZ1s82qydKQEoQCAoJLTxkmZl5Dcell2GMAHs', '2020-12-10 09:37:49', '2020-12-10 22:19:52');
+(1, 'Nafiul', 'Islam', 'male', '1995-10-09', 'nafiul1351@gmail.com', '01953806556', 'public/images/users/images/1685705951677678.jpg', 'Admin', 1, '2020-12-10 09:34:51', '$2y$10$3SuBjqYairwUZ8pAa26Xve6xHMdAdzwzHOKs35unsccubvMqGdJLG', '9TXLcQOaGtwQUKWNYuBY10BB8HedpOb3Ag8W1vQRL3iNf4IZHKCAtAGgvMLD', '2020-12-10 09:34:31', '2020-12-12 09:19:57'),
+(2, 'Sadia', 'Afrin', 'female', '1998-01-01', 'afrin.akter113@gmail.com', '01992775545', 'public/images/users/images/1685706160032343.jpg', 'Seller', 1, '2020-12-10 09:38:13', '$2y$10$b5Ot/xsm3OIU7I6poiNYveX2tqqi0eSPXAdzQ8NLhhOw2J8m7UR5q', 'N9o5umci40hhMM1Pp2XYc6ekipCUWWaYUYIfpwF9g06dohQZ3XJHH7o1qMaU', '2020-12-10 09:37:49', '2020-12-10 22:19:52'),
+(3, 'Mafia', 'Khan', 'male', '1995-01-09', 'nafiul1318@gmail.com', '01742632027', 'public/images/users/images/1686070449460564.jpg', 'Buyer', 1, '2020-12-14 10:08:33', '$2y$10$hvfx1lrCQE36DDEvaIXICueDdCG2ljvGJR2n1/ludPWWlJpim.PdC', 'B1PygCGNJNITEmaDBUwroDMEEbZ5lBPG8LATVWRQAxnmrhZNkxfmRjIp5T7Q', '2020-12-14 10:08:03', '2020-12-14 10:08:33');
 
 --
 -- Indexes for dumped tables
@@ -352,7 +353,7 @@ ALTER TABLE `shops`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

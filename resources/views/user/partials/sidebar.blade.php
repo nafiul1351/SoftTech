@@ -18,16 +18,16 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#shop" aria-expanded="false" aria-controls="shop">
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                <span class="menu-title">{{ __('Shop') }}</span>
+                <span class="menu-title">{{ __('Order') }}</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
             </a>
             <div class="collapse" id="shop">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('add.shop') }}">{{ __('Add a new Shop') }}</a>
+                        <a class="nav-link" href="">{{ __('Orders') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('all.shop') }}">{{ __('Shops') }}</a>
+                        <a class="nav-link" href="">{{ __('Reviews') }}</a>
                     </li>
                 </ul>
             </div>
