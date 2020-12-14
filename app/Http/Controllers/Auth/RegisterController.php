@@ -104,7 +104,7 @@ class RegisterController extends Controller
                     $name = hexdec(uniqid());
                     $extension = $image->getClientOriginalExtension();
                     $fullname = $name.'.'.$extension;
-                    $path = 'images/users/images/';
+                    $path = 'public/images/users/images/';
                     $url = $path.$fullname;
                     $upload = $image->move($path,$fullname);
                     $user->update(['image' => $url]);
@@ -133,7 +133,7 @@ class RegisterController extends Controller
                     $name = hexdec(uniqid());
                     $extension = $image->getClientOriginalExtension();
                     $fullname = $name.'.'.$extension;
-                    $path = 'images/users/images/';
+                    $path = 'public/images/users/images/';
                     $url = $path.$fullname;
                     $upload = $image->move($path,$fullname);
                     $user->update(['image' => $url]);
@@ -158,7 +158,7 @@ class RegisterController extends Controller
                 $name = hexdec(uniqid());
                 $extension = $image->getClientOriginalExtension();
                 $fullname = $name.'.'.$extension;
-                $path = 'images/users/images/';
+                $path = 'public/images/users/images/';
                 $url = $path.$fullname;
                 $upload = $image->move($path,$fullname);
                 $user->update(['image' => $url]);

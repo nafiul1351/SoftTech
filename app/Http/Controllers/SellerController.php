@@ -119,7 +119,7 @@ class SellerController extends Controller
         $name = hexdec(uniqid());
         $extension = $image->getClientOriginalExtension();
         $fullname = $name.'.'.$extension;
-        $path = 'images/products/images/';
+        $path = 'public/images/products/images/';
         $url = $path.$fullname;
         $upload = $image->move($path,$fullname);
         $product->coverimage = $url;
@@ -192,7 +192,7 @@ class SellerController extends Controller
             $name = hexdec(uniqid());
             $extension = $image->getClientOriginalExtension();
             $fullname = $name.'.'.$extension;
-            $path = 'images/products/images/';
+            $path = 'public/images/products/images/';
             $url = $path.$fullname;
             $upload = $image->move($path,$fullname);
             $product->coverimage = $url;
@@ -211,7 +211,14 @@ class SellerController extends Controller
 
     public function deleteproduct($id){
         $product=Product::findorfail($id);
-        $product->delete();
+        $image=$product->coverimage;
+        if(file_exists($image)){
+            unlink($image);
+            $product->delete();
+        }
+        else{
+            $product->delete();
+        }
 
         $notification = array(
             'message' => 'Product successfully deleted',

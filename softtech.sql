@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2020 at 07:05 AM
+-- Generation Time: Dec 14, 2020 at 04:38 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -149,7 +149,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `productid`, `productname`, `productmodel`, `productcolor`, `productsize`, `coverimage`, `regularprice`, `discountedprice`, `productdescription`, `user_id`, `brand_id`, `category_id`, `shop_id`, `created_at`, `updated_at`) VALUES
-(2, 'Laptop-SA1', 'HP Probook 450 G4', 'Probook 450 G4', 'Black, Red', 'None', 'images/products/images/1685883645338304.jpg', '56500', '51000', 'Name: HP Probook 450 G4\r\nModel: Probook 450 G4\r\nBrand: HP\r\nIntel Core-i5 6th Generation Processor (2.5GHz to 3.2GHz)\r\n8GB DDR4 RAM\r\n1TB HDD\r\n2GB DDR3 Intel HD Graphics', 2, 1, 4, 1, '2020-12-12 08:38:53', '2020-12-12 08:38:53');
+(2, 'Laptop-SA1', 'HP Probook 450 G4', 'Probook 450 G4', 'Black, Red', 'None', 'public/images/products/images/1685883645338304.jpg', '56500', '51000', 'Name: HP Probook 450 G4\r\nModel: Probook 450 G4\r\nBrand: HP\r\nIntel Core-i5 6th Generation Processor (2.5GHz to 3.2GHz)\r\n8GB DDR4 RAM\r\n1TB HDD\r\n2GB DDR3 Intel HD Graphics', 2, 1, 4, 1, '2020-12-12 08:38:53', '2020-12-12 08:38:53');
 
 -- --------------------------------------------------------
 
@@ -224,8 +224,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `gender`, `dob`, `email`, `phonenumber`, `image`, `type`, `approved`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Nafiul', 'Islam', 'male', '1995-10-09', 'nafiul1351@gmail.com', '01953806556', 'images/users/images/1685705951677678.jpg', 'Admin', 1, '2020-12-10 09:34:51', '$2y$10$3SuBjqYairwUZ8pAa26Xve6xHMdAdzwzHOKs35unsccubvMqGdJLG', '7Z5kvzd3huoHFUp5Dztqw6m8yuS1xcuSv4rCh9yxoBcdxQBiQj3zMOamHb7U', '2020-12-10 09:34:31', '2020-12-12 09:19:57'),
-(2, 'Sadia', 'Afrin', 'female', '1998-01-01', 'afrin.akter113@gmail.com', '01992775545', 'images/users/images/1685706160032343.jpg', 'Seller', 1, '2020-12-10 09:38:13', '$2y$10$b5Ot/xsm3OIU7I6poiNYveX2tqqi0eSPXAdzQ8NLhhOw2J8m7UR5q', '70FuwxkknPDSAMyDkoAc9FtTZ1s82qydKQEoQCAoJLTxkmZl5Dcell2GMAHs', '2020-12-10 09:37:49', '2020-12-10 22:19:52');
+(1, 'Nafiul', 'Islam', 'male', '1995-10-09', 'nafiul1351@gmail.com', '01953806556', 'public/images/users/images/1685705951677678.jpg', 'Admin', 1, '2020-12-10 09:34:51', '$2y$10$3SuBjqYairwUZ8pAa26Xve6xHMdAdzwzHOKs35unsccubvMqGdJLG', '8OXn83KRAKMo8wbfjFdIKY7ahxo3v0VEEvAIXq1R9tkJOXSLRVz5nXKBkfMP', '2020-12-10 09:34:31', '2020-12-12 09:19:57'),
+(2, 'Sadia', 'Afrin', 'female', '1998-01-01', 'afrin.akter113@gmail.com', '01992775545', 'public/images/users/images/1685706160032343.jpg', 'Seller', 1, '2020-12-10 09:38:13', '$2y$10$b5Ot/xsm3OIU7I6poiNYveX2tqqi0eSPXAdzQ8NLhhOw2J8m7UR5q', '70FuwxkknPDSAMyDkoAc9FtTZ1s82qydKQEoQCAoJLTxkmZl5Dcell2GMAHs', '2020-12-10 09:37:49', '2020-12-10 22:19:52');
 
 --
 -- Indexes for dumped tables
