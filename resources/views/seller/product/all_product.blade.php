@@ -45,8 +45,8 @@
                                                             <td>{{ $prdct->categories->categoryname}}</td>
                                                             <td>{{ $prdct->discountedprice}}</td>
                                                             <td>
-                                                                <a class="btn btn-outline-primary" href="{{URL::to('/edit/product/'.$prdct->id)}}">{{ __('Edit') }}</a>
-                                                                <a class="btn btn-outline-danger" href="{{URL::to('/delete/product/'.$prdct->id)}}" id="delete">{{ __('Delete') }}</a>
+                                                                <a class="fa fa-edit" style="color: green; text-decoration: none; padding-right: 5px;" href="{{URL::to('/edit/product/'.$prdct->id)}}"></a>
+                                                                <a class="fa fa-trash" style="color: red; text-decoration: none; padding-left: 5px;" href="{{URL::to('/delete/product/'.$prdct->id)}}" id="delete"></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

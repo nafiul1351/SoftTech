@@ -39,7 +39,7 @@
                                                             <td>{{$slr->sellerdetails->bkashnumber}}</td>
                                                             <td>{{$slr->sellerdetails->rocketnumber}}</td>
                                                             <td>
-                                                                <a class="btn btn-outline-primary" href="{{URL::to('/approve/seller/'.$slr->id)}}">{{ __('Approve') }}</a>
+                                                                <a class="fa fa-check" style="color: green; text-decoration: none;" href="{{URL::to('/approve/seller/'.$slr->id)}}"></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

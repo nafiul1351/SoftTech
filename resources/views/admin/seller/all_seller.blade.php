@@ -39,7 +39,7 @@
                                                             <td>{{$slr->sellerdetails->bkashnumber}}</td>
                                                             <td>{{$slr->sellerdetails->rocketnumber}}</td>
                                                             <td>
-                                                                <a class="btn btn-outline-danger" href="{{URL::to('/suspend/seller/'.$slr->id)}}">{{ __('Suspend') }}</a>
+                                                                <a class="fa fa-times" style="color: red; text-decoration: none;" href="{{URL::to('/suspend/seller/'.$slr->id)}}"></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

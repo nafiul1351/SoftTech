@@ -14,11 +14,13 @@ class Product extends Model
         'productname',
         'productmodel',
         'productcolor',
-        'productsize',
         'coverimage',
         'regularprice',
         'discountedprice',
+        'newly',
+        'productquantity',
         'productdescription',
+        'sales',
         'user_id',
         'brand_id',
         'category_id',
@@ -43,5 +45,30 @@ class Product extends Model
     public function shops()
     {
         return $this->belongsTo('App\Models\Shop', 'shop_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
+
+    public function wishlists()
+    {
+        return $this->belongsTo('App\Models\Wishlist');
+    }
+
+    public function otherimages()
+    {
+        return $this->hasMany('App\Models\Otherimage');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany('App\Models\Cart');
+    }
+
+    public function orderdetails()
+    {
+        return $this->hasOne('App\Models\Orderdetail');
     }
 }

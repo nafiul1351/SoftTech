@@ -19,11 +19,13 @@ class CreateProductsTable extends Migration
             $table->string('productname');
             $table->string('productmodel');
             $table->string('productcolor');
-            $table->string('productsize');
             $table->string('coverimage');
             $table->string('regularprice');
             $table->string('discountedprice');
+            $table->boolean('newly');
+            $table->string('productquantity');
             $table->string('productdescription');
+            $table->string('sales')->default('0');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('brand_id');

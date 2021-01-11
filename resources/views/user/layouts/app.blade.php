@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="{{asset('public/css/toastr.min.css')}}" />
     <link rel="stylesheet" href="{{asset('public/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/bootstrap-select.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/frontend/css/slick.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/frontend/css/slick-theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/frontend/css/font-awesome.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/frontend/css/style.css') }}" />
 </head>
 <body class="sidebar-dark">
     <!-- Contents -->
@@ -53,8 +57,10 @@
     <script src="{{ asset('public/js/data-table.js') }}"></script>
     <script src="{{asset('public/js/toastr.min.js')}}"></script>
     <script src="{{asset('public/js/sweetalert.min.js')}}"></script>
-    <script src="{{asset('public/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('public/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{ asset('public/frontend/js/slick.min.js') }}"></script>
+    <script src="{{ asset('public/frontend/js/jquery.zoom.min.js') }}"></script>
+    <script src="{{ asset('public/frontend/js/main.js') }}"></script>
     <script>
         @if(Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}";

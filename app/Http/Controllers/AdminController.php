@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\User;
+use Image;
 
 class AdminController extends Controller
 {
@@ -81,11 +82,22 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'serialnumber' => ['required', 'string', 'max:255', 'unique:categories'],
             'categoryname' => ['required', 'string', 'max:255', 'unique:categories'],
+            'categoryimage' => ['required', 'image', 'max:2048'],
         ]);
 
         $category = new Category;
         $category->serialnumber=$request->serialnumber;
         $category->categoryname=$request->categoryname;
+        $image = $request->file('categoryimage');
+        $name = hexdec(uniqid());
+        $extension = $image->getClientOriginalExtension();
+        $fullname = $name.'.'.$extension;
+        $path = 'public/images/categories/images/';
+        $url = $path.$fullname;
+        $resize_image=Image::make($image->getRealPath());
+        $resize_image->resize(360,240);
+        $resize_image->save('public/images/categories/images/'.$fullname);
+        $category->categoryimage = $url;
         $category->save();
 
         $notification = array(
@@ -110,12 +122,32 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'serialnumber' => ['required', 'string', 'max:255'],
             'categoryname' => ['required', 'string', 'max:255'],
+            'categoryimage' => ['image', 'max:2048'],
         ]);
 
         $category = Category::findorfail($id);
         $category->serialnumber=$request->serialnumber;
         $category->categoryname=$request->categoryname;
-        $category->save();
+        $image = $request->file('categoryimage');
+        if($image){
+            $old_image=$request->old_image;
+            if(file_exists($old_image)){
+                unlink($old_image);
+            }
+            $name = hexdec(uniqid());
+            $extension = $image->getClientOriginalExtension();
+            $fullname = $name.'.'.$extension;
+            $path = 'public/images/categories/images/';
+            $url = $path.$fullname;
+            $resize_image=Image::make($image->getRealPath());
+            $resize_image->resize(360,240);
+            $resize_image->save('public/images/categories/images/'.$fullname);
+            $category->categoryimage = $url;
+            $category->save();
+        }
+        else{
+            $category->save();
+        }
 
         $notification = array(
             'message' => 'Category successfully updated',
@@ -126,7 +158,14 @@ class AdminController extends Controller
 
     public function deletecategory($id){
         $category=Category::findorfail($id);
-        $category->delete();
+        $image=$category->categoryimage;
+        if(file_exists($image)){
+            unlink($image);
+            $category->delete();
+        }
+        else{
+            $category->delete();
+        }
 
         $notification = array(
             'message' => 'Category successfully deleted',

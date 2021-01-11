@@ -33,8 +33,8 @@
                                                             <td>{{$brnd->serialnumber}}</td>
                                                             <td>{{$brnd->brandname}}</td>
                                                             <td>
-                                                                <a class="btn btn-outline-primary" href="{{URL::to('/edit/brand/'.$brnd->id)}}">{{ __('Edit') }}</a>
-                                                                <a class="btn btn-outline-danger" href="{{URL::to('/delete/brand/'.$brnd->id)}}" id="delete">{{ __('Delete') }}</a>
+                                                                <a class="fa fa-edit" style="color: green; text-decoration: none; padding-right: 5px;" href="{{URL::to('/edit/brand/'.$brnd->id)}}"></a>
+                                                                <a class="fa fa-trash" style="color: red; text-decoration: none; padding-left: 5px;" href="{{URL::to('/delete/brand/'.$brnd->id)}}" id="delete"></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

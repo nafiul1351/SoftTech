@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\FrontendController::class, 'welcome']);
+
+Route::get('/search/result', [App\Http\Controllers\FrontendController::class, 'searchresult'])->name('search.result');
+
+Route::get('/product/for/category/{id}', [App\Http\Controllers\FrontendController::class, 'categorywiseproduct']);
+
+Route::get('/product/for/brand/{id}', [App\Http\Controllers\FrontendController::class, 'brandwiseproduct']);
+
+Route::get('/product/detail/{id}', [App\Http\Controllers\FrontendController::class, 'productdetail']);
 
 Auth::routes(['verify' => true]);
 
@@ -63,10 +69,42 @@ Route::middleware(['auth','verified'])->group(function () {
 			Route::get('/edit/product/{id}', [App\Http\Controllers\SellerController::class, 'editproduct']);
 			Route::post('/update/product/{id}', [App\Http\Controllers\SellerController::class, 'updateproduct']);
 			Route::get('/delete/product/{id}', [App\Http\Controllers\SellerController::class, 'deleteproduct']);
+
+			Route::get('/seller/processing/order', [App\Http\Controllers\SellerController::class, 'sellerprocessingorder'])->name('seller.processing.order');
+			Route::get('/seller/completed/order', [App\Http\Controllers\SellerController::class, 'sellercompletedorder'])->name('seller.completed.order');
+			Route::get('/seller/canceled/order', [App\Http\Controllers\SellerController::class, 'sellercanceledorder'])->name('seller.canceled.order');
+			Route::get('/seller/view/order/{id}', [App\Http\Controllers\SellerController::class, 'sellervieworder']);
 		});
 	});
 
 	Route::middleware(['buyer'])->group(function () {
 		Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('buyer.home');
+
+		Route::get('/add/to/wishlist/{id}', [App\Http\Controllers\FrontendController::class, 'addtowishlist']);
+		Route::get('/show/wishlist', [App\Http\Controllers\FrontendController::class, 'showwishlist'])->name('show.wishlist');
+		Route::get('/remove/from/wishlist/{id}', [App\Http\Controllers\FrontendController::class, 'removefromwishlist']);
+
+		Route::post('/add/to/cart/{id}', [App\Http\Controllers\FrontendController::class, 'addtocart']);
+		Route::get('/remove/from/cart/{id}', [App\Http\Controllers\FrontendController::class, 'removefromcart']);
+		Route::get('/view/cart', [App\Http\Controllers\FrontendController::class, 'viewcart'])->name('view.cart');
+		Route::post('/update/cart/{id}', [App\Http\Controllers\FrontendController::class, 'updatecart']);
+
+		Route::get('/order/checkout', [App\Http\Controllers\FrontendController::class, 'ordercheckout'])->name('order.checkout');
+		Route::get('/add/order', [App\Http\Controllers\FrontendController::class, 'addorder'])->name('add.order');
+		Route::get('/buyer/processing/order', [App\Http\Controllers\FrontendController::class, 'buyerprocessingorder'])->name('buyer.processing.order');
+		Route::get('/buyer/completed/order', [App\Http\Controllers\FrontendController::class, 'buyercompletedorder'])->name('buyer.completed.order');
+		Route::get('/buyer/canceled/order', [App\Http\Controllers\FrontendController::class, 'buyercanceledorder'])->name('buyer.canceled.order');
+		Route::get('/buyer/view/order/{id}', [App\Http\Controllers\FrontendController::class, 'buyervieworder']);
+		Route::get('/cancel/order/{id}', [App\Http\Controllers\FrontendController::class, 'cancelorder']);
+
+		Route::post('/submit/review/{id}', [App\Http\Controllers\FrontendController::class, 'submitreview']);
+
+		Route::post('/pay/order/{total}', [App\Http\Controllers\SslCommerzPaymentController::class, 'index']);
 	});
 });
+
+Route::post('/payment/success', [App\Http\Controllers\SslCommerzPaymentController::class, 'success']);
+Route::post('/payment/fail', [App\Http\Controllers\SslCommerzPaymentController::class, 'fail']);
+Route::post('/payment/cancel', [App\Http\Controllers\SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/payment/ipn', [App\Http\Controllers\SslCommerzPaymentController::class, 'ipn']);

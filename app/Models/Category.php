@@ -12,6 +12,7 @@ class Category extends Model
     protected $fillable = [
         'serialnumber',
         'categoryname',
+        'categoryimage',
     ];
 
     public function products()

@@ -24,10 +24,13 @@
             <div class="collapse" id="shop">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="">{{ __('Orders') }}</a>
+                        <a class="nav-link" href="{{ route('buyer.processing.order') }}">{{ __('Processing Orders') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">{{ __('Reviews') }}</a>
+                        <a class="nav-link" href="{{ route('buyer.completed.order') }}">{{ __('Completed Orders') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('buyer.canceled.order') }}">{{ __('Canceled Orders') }}</a>
                     </li>
                 </ul>
             </div>

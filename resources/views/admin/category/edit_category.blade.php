@@ -16,7 +16,7 @@
                         <h1 style="text-align: center;" class="page-title">{{ __('Update this Category') }}</h1>
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="{{URL::to('/update/category/'.$category->id)}}">
+                                <form method="POST" action="{{URL::to('/update/category/'.$category->id)}}" enctype="multipart/form-data">
                                     @csrf
                                     
                                     <div class="form-group">
@@ -32,6 +32,16 @@
                                         <label for="categoryname">{{ __('Category Name:') }}</label>
                                         <input id="categoryname" type="text" class="form-control @error('categoryname') is-invalid @enderror" name="categoryname" placeholder="Please enter the category name" value="{{ $category->categoryname }}" required autocomplete="categoryname" autofocus>
                                         @error('categoryname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="categoryimage">{{ __('Category Image:') }}</label>
+                                        <input id="categoryimage" type="file" class="dropify @error('categoryimage') is-invalid @enderror" name="categoryimage" data-height="150">
+                                        <input type="hidden" name="old_image" value="{{$category->categoryimage}}">
+                                        @error('categoryimage')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('serialnumber')->unique();
             $table->string('categoryname')->unique();
+            $table->string('categoryimage');
             $table->timestamps();
         });
     }

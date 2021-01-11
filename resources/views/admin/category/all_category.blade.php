@@ -23,6 +23,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>{{ __('Serial') }}</th>
+                                                        <th>{{ __('Image') }}</th>
                                                         <th>{{ __('Name') }}</th>
                                                         <th>{{ __('Actions') }}</th>
                                                     </tr>
@@ -31,10 +32,13 @@
                                                     @foreach($category as $ctgry)
                                                         <tr>
                                                             <td>{{$ctgry->serialnumber}}</td>
+                                                            <td>
+                                                                <img style="height: 80px; width: 100px; border-radius: 5px;" src="{{asset($ctgry->categoryimage)}}">
+                                                            </td>
                                                             <td>{{$ctgry->categoryname}}</td>
                                                             <td>
-                                                                <a class="btn btn-outline-primary" href="{{URL::to('/edit/category/'.$ctgry->id)}}">{{ __('Edit') }}</a>
-                                                                <a class="btn btn-outline-danger" href="{{URL::to('/delete/category/'.$ctgry->id)}}" id="delete">{{ __('Delete') }}</a>
+                                                                <a class="fa fa-edit" style="color: green; text-decoration: none; padding-right: 5px;" href="{{URL::to('/edit/category/'.$ctgry->id)}}"></a>
+                                                                <a class="fa fa-trash" style="color: red; text-decoration: none; padding-left: 5px;" href="{{URL::to('/delete/category/'.$ctgry->id)}}" id="delete"></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

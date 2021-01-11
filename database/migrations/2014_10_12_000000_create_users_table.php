@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('dob');
             $table->string('email')->unique();
             $table->string('phonenumber')->unique();
-            $table->string('image')->default('images/users/images/default.png');
+            $table->string('image')->default('public/images/users/images/default.png');
             $table->string('type');
             $table->boolean('approved')->default(false);
             $table->timestamp('email_verified_at')->nullable();

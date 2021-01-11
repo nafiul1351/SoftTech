@@ -39,10 +39,10 @@
                         <div class="form-group">
                             <label for="gender">{{ __('Gender:') }}</label>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <label class="form-check-label"><input type="radio" id="gender" class="form-check-input @error('gender') is-invalid @enderror" name="gender" autofocus value="male">{{ __('Male') }}</label>
+                                <label class="form-check-label"><input type="radio" id="gender" class="form-check-input @error('gender') is-invalid @enderror" name="gender" autofocus value="Male">{{ __('Male') }}</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <label class="form-check-label"><input type="radio" id="gender" class="form-check-input @error('gender') is-invalid @enderror" name="gender" autofocus value="female">{{ __('Female') }}</label>
+                                <label class="form-check-label"><input type="radio" id="gender" class="form-check-input @error('gender') is-invalid @enderror" name="gender" autofocus value="Female">{{ __('Female') }}</label>
                             </div>
                             @error('gender')
                                 <span class="invalid-feedback" role="alert">
@@ -96,16 +96,16 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>{{ __('Profile Picture:') }}</label>
-                            <div class="custom-file">
-                                <input id="image" type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image">
-                                <label class="custom-file-label" for="image"><p2>{{ __('Choose file') }}</p2></label>
+                            <label for="image">{{ __('Profile Picture:') }}</label>
+                            
+                                <input id="image" type="file" class="dropify @error('image') is-invalid @enderror" data-height="100" name="image">
+                                
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            
                         </div>
                         <div class="form-group">
                             <label for="password">{{ __('Password:') }}</label>
@@ -132,15 +132,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('input[type="file"]').change(function(e) {
-                var geekss = e.target.files[0].name;
-                $("p2").text(geekss);
-            });
-        });
-    </script>
 @endsection

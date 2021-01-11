@@ -49,5 +49,25 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#order" aria-expanded="false" aria-controls="order">
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <span class="menu-title">{{ __('Order') }}</span>
+                <i class="mdi mdi-chevron-down menu-arrow"></i>
+            </a>
+            <div class="collapse" id="order">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('seller.processing.order') }}">{{ __('Processing Orders') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('seller.completed.order') }}">{{ __('Completed Orders') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('seller.canceled.order') }}">{{ __('Canceled Orders') }}</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>

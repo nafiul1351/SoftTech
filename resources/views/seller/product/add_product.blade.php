@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="brand">{{ __('Select Brand:') }}</label>
-                                        <select id="brand" name="brand" class="selectpicker @error('brand') is-invalid @enderror" required>
+                                        <select id="brand" name="brand" class="selectpicker @error('brand') is-invalid @enderror">
                                             <option disabled selected>Nothing selected</option>
                                             @foreach($brand as $brnd)
                                                 <option value="{{$brnd->id}}">{{$brnd->brandname}}</option>
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="category">{{ __('Select Category:') }}</label>
-                                        <select id="category" name="category" class="selectpicker @error('category') is-invalid @enderror" required>
+                                        <select id="category" name="category" class="selectpicker @error('category') is-invalid @enderror">
                                             <option disabled selected>Nothing selected</option>
                                             @foreach($category as $ctgry)
                                                 <option value="{{$ctgry->id}}">{{$ctgry->categoryname}}</option>
@@ -84,17 +84,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="productsize">{{ __('Product Size:') }}</label>
-                                        <input id="productsize" type="text" class="form-control @error('productsize') is-invalid @enderror" name="productsize" placeholder="Please enter the product size" value="{{ old('productsize') }}" required autocomplete="productsize" autofocus>
-                                        @error('productsize')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
                                         <label for="shop">{{ __('Select Shop:') }}</label>
-                                        <select id="shop" name="shop" class="selectpicker @error('shop') is-invalid @enderror" required>
+                                        <select id="shop" name="shop" class="selectpicker @error('shop') is-invalid @enderror">
                                             <option disabled selected>Nothing selected</option>
                                             @foreach($shop as $shp)
                                                 <option value="{{$shp->id}}">{{$shp->shopname}}</option>
@@ -107,16 +98,23 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>{{ __('Cover Image:') }}</label>
-                                        <div class="custom-file">
-                                            <input id="coverimage" type="file" class="custom-file-input @error('coverimage') is-invalid @enderror" name="coverimage" required>
-                                            <label class="custom-file-label" for="coverimage"><p2>{{ __('Choose file') }}</p2></label>
-                                            @error('coverimage')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                        <label for="coverimage">{{ __('Cover Image:') }}</label>
+                                        <input id="coverimage" type="file" class="dropify @error('coverimage') is-invalid @enderror" data-height="150" name="coverimage" required>
+                                        @error('coverimage')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="otherimages">{{ __('Other Images:') }}</label>
+                                        <label>{{ __('*Minimum 3 images are required*') }}</label>
+                                        <input id="otherimages" type="file" class="dropify @error('otherimages') is-invalid @enderror" data-height="150" name="otherimages[]" multiple required>
+                                        @error('otherimages')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="regularprice">{{ __('Regular Price:') }}</label>
@@ -131,6 +129,29 @@
                                         <label for="discountedprice">{{ __('Discounted Price:') }}</label>
                                         <input id="discountedprice" type="text" class="form-control @error('discountedprice') is-invalid @enderror" name="discountedprice" placeholder="Please enter the discounted price" value="{{ old('discountedprice') }}" required autocomplete="discountedprice" autofocus>
                                         @error('discountedprice')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newly">{{ __('Is it a new product?') }}</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <label class="form-check-label"><input type="radio" id="newly" class="form-check-input @error('newly') is-invalid @enderror" name="newly" autofocus value="1">{{ __('Yes') }}</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <label class="form-check-label"><input type="radio" id="newly" class="form-check-input @error('newly') is-invalid @enderror" name="newly" autofocus value="0">{{ __('No') }}</label>
+                                        </div>
+                                        @error('newly')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productquantity">{{ __('Product Quantity:') }}</label>
+                                        <input id="productquantity" type="text" class="form-control @error('productquantity') is-invalid @enderror" name="productquantity" placeholder="Please enter the product quantity" value="{{ old('productquantity') }}" required autocomplete="productquantity" autofocus>
+                                        @error('productquantity')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -162,12 +183,19 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('input[type="file"]').change(function(e) {
-                var geekss = e.target.files[0].name;
-                $("p2").text(geekss);
-            });
+<script>
+    var limit = 3;
+    $(document).ready(function(){
+        $('#otherimages').change(function(){
+            var files = $(this)[0].files;
+            if(files.length < limit){
+                alert("Minimum "+limit+" images are required.");
+                $('#otherimages').val('');
+                return false;
+            }else{
+                return true;
+            }
         });
-    </script>
+    });
+</script>
 @endsection

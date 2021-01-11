@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/logo.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/node_modules/dropify/dist/css/dropify.min.css')}}">
 </head>
 <body>
     <!-- Contents -->
@@ -43,6 +44,7 @@
     <script src="{{ asset('public/js/plugins.js') }}"></script>
     <script src="{{ asset('public/js/scripts.js') }}"></script>
     <script src="{{ asset('public/js/app.js') }}"></script>
-    @yield('scripts')
+    <script src="{{asset('public/node_modules/dropify/dist/js/dropify.min.js')}}"></script>
+    <script src="{{asset('public/js/dropify.js')}}"></script>
 </body>
 </html>

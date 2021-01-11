@@ -16,7 +16,7 @@
                         <h1 style="text-align: center;" class="page-title">{{ __('Add a new Category') }}</h1>
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="{{ route('add.category') }}">
+                                <form method="POST" action="{{ route('add.category') }}" enctype="multipart/form-data">
                                     @csrf
                                     
                                     <div class="form-group">
@@ -32,6 +32,15 @@
                                         <label for="categoryname">{{ __('Category Name:') }}</label>
                                         <input id="categoryname" type="text" class="form-control @error('categoryname') is-invalid @enderror" name="categoryname" placeholder="Please enter the category name" value="{{ old('categoryname') }}" required autocomplete="categoryname" autofocus>
                                         @error('categoryname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="categoryimage">{{ __('Category Image:') }}</label>
+                                        <input id="categoryimage" type="file" class="dropify @error('categoryimage') is-invalid @enderror" name="categoryimage" data-height="150" required>
+                                        @error('categoryimage')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

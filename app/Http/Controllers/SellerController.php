@@ -7,6 +7,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Shop;
 use App\Models\Product;
+use App\Models\Otherimage;
+use App\Models\Orderdetail;
+use Image;
 use Auth;
 
 class SellerController extends Controller
@@ -87,9 +90,9 @@ class SellerController extends Controller
 
     public function addproduct()
     {
-        $brand=Brand::all();
-        $category=Category::all();
-        $shop=Shop::where('user_id', Auth::user()->id)->get();
+        $brand=Brand::orderBy('brandname', 'ASC')->get();
+        $category=Category::orderBy('categoryname', 'ASC')->get();
+        $shop=Shop::where('user_id', Auth::user()->id)->orderBy('shopname', 'ASC')->get();
         return view('seller.product.add_product', compact('brand', 'category', 'shop'));
     }
 
@@ -101,12 +104,15 @@ class SellerController extends Controller
             'brand' => ['required'],
             'category' => ['required'],
             'productcolor' => ['required', 'string', 'max:255'],
-            'productsize' => ['required', 'string', 'max:255'],
             'shop' => ['required'],
             'coverimage' => ['required', 'image', 'max:2048'],
+            'otherimages' => ['required'],
+            'otherimages.*' => ['image', 'max:2048'],
             'regularprice' => ['required', 'string', 'max:255'],
             'discountedprice' => ['required', 'string', 'max:255'],
-            'productdescription' => ['required', 'string', 'max:255'],
+            'newly' => ['required', 'string'],
+            'productquantity' => ['required', 'string', 'max:255'],
+            'productdescription' => ['required', 'string', 'max:1500'],
         ]);
 
         $product = new Product;
@@ -114,23 +120,41 @@ class SellerController extends Controller
         $product->productname=$request->productname;
         $product->productmodel=$request->productmodel;
         $product->productcolor=$request->productcolor;
-        $product->productsize=$request->productsize;
         $image = $request->file('coverimage');
         $name = hexdec(uniqid());
         $extension = $image->getClientOriginalExtension();
         $fullname = $name.'.'.$extension;
         $path = 'public/images/products/images/';
         $url = $path.$fullname;
-        $upload = $image->move($path,$fullname);
+        $resize_image=Image::make($image->getRealPath());
+        $resize_image->resize(500,500);
+        $resize_image->save('public/images/products/images/'.$fullname);
         $product->coverimage = $url;
         $product->productdescription=$request->productdescription;
         $product->regularprice=$request->regularprice;
         $product->discountedprice=$request->discountedprice;
+        $product->newly=$request->newly;
+        $product->productquantity=$request->productquantity;
         $product->user_id=Auth::user()->id;
         $product->brand_id=$request->brand;
         $product->category_id=$request->category;
         $product->shop_id=$request->shop;
         $product->save();
+        $images = $request->file('otherimages');
+        foreach ($images as $img) {
+            $name = hexdec(uniqid());
+            $extension = $img->getClientOriginalExtension();
+            $fullname = $name.'.'.$extension;
+            $path = 'public/images/products/images/otherimages/';
+            $url = $path.$fullname;
+            $resize_image=Image::make($img->getRealPath());
+            $resize_image->resize(500,500);
+            $resize_image->save('public/images/products/images/otherimages/'.$fullname);
+            Otherimage::create([
+                'otherimage' => $url,
+                'product_id' => $product->id,
+            ]);
+        }
 
         $notification = array(
             'message' => 'Product successfully added',
@@ -148,9 +172,9 @@ class SellerController extends Controller
     public function editproduct($id)
     {
         $product=Product::findorfail($id);
-        $brand=Brand::all();
-        $category=Category::all();
-        $shop=Shop::where('user_id', Auth::user()->id)->get();
+        $brand=Brand::orderBy('brandname', 'ASC')->get();
+        $category=Category::orderBy('categoryname', 'ASC')->get();
+        $shop=Shop::where('user_id', Auth::user()->id)->orderBy('shopname', 'ASC')->get();
         return view('seller.product.edit_product', compact('product', 'brand', 'category', 'shop'));
     }
 
@@ -162,12 +186,13 @@ class SellerController extends Controller
             'brand' => ['required'],
             'category' => ['required'],
             'productcolor' => ['required', 'string', 'max:255'],
-            'productsize' => ['required', 'string', 'max:255'],
             'shop' => ['required'],
             'coverimage' => ['image', 'max:2048'],
+            'otherimages.*' => ['image', 'max:2048'],
             'regularprice' => ['required', 'string', 'max:255'],
             'discountedprice' => ['required', 'string', 'max:255'],
-            'productdescription' => ['required', 'string', 'max:255'],
+            'productquantity' => ['required', 'string', 'max:255'],
+            'productdescription' => ['required', 'string', 'max:1500'],
         ]);
 
         $product = Product::findorfail($id);
@@ -175,7 +200,6 @@ class SellerController extends Controller
         $product->productname=$request->productname;
         $product->productmodel=$request->productmodel;
         $product->productcolor=$request->productcolor;
-        $product->productsize=$request->productsize;
         $product->productdescription=$request->productdescription;
         $product->regularprice=$request->regularprice;
         $product->discountedprice=$request->discountedprice;
@@ -194,12 +218,42 @@ class SellerController extends Controller
             $fullname = $name.'.'.$extension;
             $path = 'public/images/products/images/';
             $url = $path.$fullname;
-            $upload = $image->move($path,$fullname);
+            $resize_image=Image::make($image->getRealPath());
+            $resize_image->resize(500,500);
+            $resize_image->save('public/images/products/images/'.$fullname);
             $product->coverimage = $url;
             $product->save();
         }
         else{
             $product->save();
+        }
+        $images = $request->file('otherimages');
+        if ($images) {
+            $otherimages_id=$request->otherimages_id;
+            $old_otherimages=$request->old_otherimages;
+            foreach ($old_otherimages as $old_othrimg) {
+                if(file_exists($old_othrimg)){
+                    unlink($old_othrimg);
+                }
+            }
+            foreach ($otherimages_id as $othrimg_id) {
+                $otherimage=Otherimage::findorfail($othrimg_id);
+                $otherimage->delete();
+            }
+            foreach ($images as $img) {
+                $name = hexdec(uniqid());
+                $extension = $img->getClientOriginalExtension();
+                $fullname = $name.'.'.$extension;
+                $path = 'public/images/products/images/otherimages/';
+                $url = $path.$fullname;
+                $resize_image=Image::make($img->getRealPath());
+                $resize_image->resize(500,500);
+                $resize_image->save('public/images/products/images/otherimages/'.$fullname);
+                Otherimage::create([
+                    'otherimage' => $url,
+                    'product_id' => $product->id,
+                ]);
+            }
         }
 
         $notification = array(
@@ -225,5 +279,31 @@ class SellerController extends Controller
             'alert-type' => 'error'
         );
         return Redirect()->back()->with($notification);
+    }
+
+    public function sellerprocessingorder(){
+        $user_id = Auth::user()->id;
+        $product_id=Product::where('user_id', $user_id)->pluck('id');
+        $orderdetail=Orderdetail::whereIn('product_id', $product_id)->get();
+        return view('seller.order.processing_order', compact('orderdetail'));
+    }
+
+    public function sellercompletedorder(){
+        $user_id = Auth::user()->id;
+        $product_id=Product::where('user_id', $user_id)->pluck('id');
+        $orderdetail=Orderdetail::whereIn('product_id', $product_id)->get();
+        return view('seller.order.completed_order', compact('orderdetail'));
+    }
+
+    public function sellercanceledorder(){
+        $user_id = Auth::user()->id;
+        $product_id=Product::where('user_id', $user_id)->pluck('id');
+        $orderdetail=Orderdetail::whereIn('product_id', $product_id)->get();
+        return view('seller.order.canceled_order', compact('orderdetail'));
+    }
+
+    public function sellervieworder($id){
+        $orderdetail=Orderdetail::findorfail($id);
+        return view('seller.order.view_order', compact('orderdetail'));
     }
 }

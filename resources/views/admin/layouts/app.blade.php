@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('public/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{asset('public/css/toastr.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('public/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('public/frontend/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/node_modules/dropify/dist/css/dropify.min.css')}}">
 </head>
 <body class="sidebar-dark">
     <!-- Contents -->
@@ -51,6 +54,8 @@
     <script src="{{ asset('public/js/data-table.js') }}"></script>
     <script src="{{asset('public/js/toastr.min.js')}}"></script>
     <script src="{{asset('public/js/sweetalert.min.js')}}"></script>
+    <script src="{{asset('public/node_modules/dropify/dist/js/dropify.min.js')}}"></script>
+    <script src="{{asset('public/js/dropify.js')}}"></script>
     <script>
         @if(Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}";
