@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <label for="brand">{{ __('Select Brand:') }}</label>
                                         <select id="brand" name="brand" class="selectpicker @error('brand') is-invalid @enderror" required>
-                                            <option disabled selected>Nothing selected</option>
+                                            <option disabled selected>{{ __('Nothing selected') }}</option>
                                             @foreach($brand as $brnd)
                                                 <option value="{{$brnd->id}}">{{$brnd->brandname}}</option>
                                             @endforeach
@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <label for="category">{{ __('Select Category:') }}</label>
                                         <select id="category" name="category" class="selectpicker @error('category') is-invalid @enderror" required>
-                                            <option disabled selected>Nothing selected</option>
+                                            <option disabled selected>{{ __('Nothing selected') }}</option>
                                             @foreach($category as $ctgry)
                                                 <option value="{{$ctgry->id}}">{{$ctgry->categoryname}}</option>
                                             @endforeach
@@ -86,7 +86,7 @@
                                     <div class="form-group">
                                         <label for="shop">{{ __('Select Shop:') }}</label>
                                         <select id="shop" name="shop" class="selectpicker @error('shop') is-invalid @enderror" required>
-                                            <option disabled selected>Nothing selected</option>
+                                            <option disabled selected>{{ __('Nothing selected') }}</option>
                                             @foreach($shop as $shp)
                                                 <option value="{{$shp->id}}">{{$shp->shopname}}</option>
                                             @endforeach

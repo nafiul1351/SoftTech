@@ -52,11 +52,11 @@
                                                                 <td>
                                                                     <a class="fa fa-eye" style="color: green; text-decoration: none;" href="{{URL::to('/seller/view/order/'.$ordrdtl->id)}}"></a>
                                                                     @if($ordrdtl->status == 'Processing')
-                                                                        <a style="color: blue; text-decoration: none; padding-left: 10px;" class="fa fa-gift" href="{{URL::to('/cancel/order/'.$ordrdtl->id)}}"></a>
+                                                                        <a style="color: blue; text-decoration: none; padding-left: 10px;" class="fa fa-gift" href="{{URL::to('/package/order/'.$ordrdtl->id)}}"></a>
                                                                     @elseif($ordrdtl->status == 'Packaged')
-                                                                        <a style="color: blue; text-decoration: none; padding-left: 10px;" class="fa fa-ship" href="{{URL::to('/cancel/order/'.$ordrdtl->id)}}"></a>
+                                                                        <a style="color: blue; text-decoration: none; padding-left: 10px;" class="fa fa-ship" href="{{URL::to('/ship/order/'.$ordrdtl->id)}}"></a>
                                                                     @elseif($ordrdtl->status == 'Shipped')
-                                                                        <a style="color: blue; text-decoration: none; padding-left: 10px;" class="fa fa-check" href="{{URL::to('/cancel/order/'.$ordrdtl->id)}}"></a>
+                                                                        <a style="color: blue; text-decoration: none; padding-left: 10px;" class="fa fa-check" href="{{URL::to('/deliver/order/'.$ordrdtl->id)}}"></a>
                                                                     @endif
                                                                 </td>
                                                             </tr>

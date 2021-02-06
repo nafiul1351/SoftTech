@@ -58,7 +58,7 @@
             <div class="collapse" id="seller">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('approve.seller') }}">{{ __('Approve Sellers') }}<span style="margin-left: 5px; text-align: center; border-radius: 5px; width: 20px; height: 20px; color: white;" class="count bg-danger" id="noti_number"></span></a>
+                        <a class="nav-link" href="{{ route('approve.seller') }}">{{ __('Approve Sellers') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('all.seller') }}">{{ __('Sellers') }}</a>
@@ -68,12 +68,3 @@
         </li>
     </ul>
 </nav>
-
-<script type="text/javascript">
-    function loadDoc() {
-        setInterval(function(){
-            $('#noti_number').load('/{{ config('app.name', 'Laravel') }}/public/noti_number.php');
-      },1000);
-    }
-    loadDoc();
-</script>

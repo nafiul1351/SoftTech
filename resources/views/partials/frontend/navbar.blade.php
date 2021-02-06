@@ -3,14 +3,14 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left" style="color: white;">
-                <li><i class="fa fa-phone"></i> {{ __('+8801953806556') }}</li>
-                <li><i class="fa fa-envelope-o"></i> {{ __('nafiul1351@gmail.com') }}</li>
+                <li><a href="tel:+8801992775545"><i class="fa fa-phone"></i> {{ __('+8801992775545') }}</a></li>
+                <li><a href="mailto:nafiul1351@gmail.com"><i class="fa fa-envelope-o"></i> {{ __('nafiul1351@gmail.com') }}</a></li>
                 <li><i class="fa fa-map-marker"></i> {{ __('Mirpur, Dhaka') }}</li>
             </ul>
             <ul class="header-links pull-right">
                 @if (Route::has('login'))
                     @auth
-                        <li><a href="{{ url('/home') }}"><i class="fa fa-user-o"></i> {{ __('Dashboard') }}</a></li>
+                        <li><a href="{{ url('/home') }}"><i class="fa fa-user"></i> {{ __('Dashboard') }}</a></li>
                         <li>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fa fa-power-off"></i>
@@ -135,25 +135,17 @@
     <div class="container">
         <div id="responsive-nav">
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="{{ URL::to('/') }}">{{ __('Home') }}</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#brand" aria-expanded="false" aria-controls="brand">
-                        <span class="menu-title">{{ __('Brands') }}</span>
-                        <i class="fa fa-caret-down"></i>
-                    </a>
-                    <div class="collapse" id="brand">
-                        <ul class="nav flex-column sub-menu">
-                            @foreach($brand as $brnd)
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::to('/product/for/brand/'.$brnd->id)}}">{{ $brnd->brandname }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <li class="{{ '/' == request()->path() ? 'active' : '' }}"><a href="{{ URL::to('/') }}">{{ __('Home') }}</a></li>
+                <li class="{{ request()->segment(3) == 'brand' ? 'active' : '' }}"><a href="">{{ __('Brands') }}</a>
+                    <ul>
+                        @foreach($brand as $brnd)
+                            <li><a href="{{URL::to('/product/for/brand/'.$brnd->id)}}">{{ $brnd->brandname }}</a></li>
+                        @endforeach
+                    </ul>
                 </li>
-                
-                <li><a href="#">Store</a></li>
-                <li><a href="#">Contact us</a></li>
+                <li class="{{ request()->segment(2) == 'store' ? 'active' : '' }}"><a href="{{ route('product.store') }}">{{ __('Store') }}</a></li>
+                <li class="{{ request()->segment(1) == 'contact' ? 'active' : '' }}"><a href="{{ route('contact.us') }}">{{ __('Contact Us') }}</a></li>
+                <li class="{{ request()->segment(1) == 'about' ? 'active' : '' }}"><a href="{{ route('about.us') }}">{{ __('About Us') }}</a></li>
             </ul>
         </div>
     </div>

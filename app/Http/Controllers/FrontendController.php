@@ -101,18 +101,70 @@ class FrontendController extends Controller
         Paginator::useBootstrap();
         $brand=Brand::orderBy('brandname', 'ASC')->get();
         $category=Category::findorfail($id);
-        $product=Product::where('category_id', $id)->paginate(12);
+        $product=Product::where('category_id', $id)->paginate(9);
         $product_all=Product::where('category_id', $id)->get();
         return view('category_wise', compact('brand', 'category', 'product', 'product_all'));
     }
 
+    public function categorywisebrandproduct(Request $request){
+        Paginator::useBootstrap();
+        $brand_id=$request->brand_id;
+        $cat_id=$request->cat_id;
+        if ($brand_id == 0) {
+            $product=Product::where('category_id', $cat_id)->paginate(9);
+            $product_all=Product::where('category_id', $cat_id)->get();
+            return view('category_wise_brand', compact('product', 'product_all'));
+        }
+        else{
+            $product=Product::where('category_id', $cat_id)->where('brand_id', $brand_id)->paginate(9);
+            $product_all=Product::where('category_id', $cat_id)->where('brand_id', $brand_id)->get();
+            return view('category_wise_brand', compact('product', 'product_all'));
+        }
+    }
+
     public function brandwiseproduct($id){
         Paginator::useBootstrap();
+        $category=Category::orderBy('categoryname', 'ASC')->get();
         $brand=Brand::orderBy('brandname', 'ASC')->get();
         $brand2=Brand::findorfail($id);
-        $product=Product::where('brand_id', $id)->paginate(12);
+        $product=Product::where('brand_id', $id)->paginate(9);
         $product_all=Product::where('brand_id', $id)->get();
-        return view('brand_wise', compact('brand', 'brand2', 'product', 'product_all'));
+        return view('brand_wise', compact('category', 'brand', 'brand2', 'product', 'product_all'));
+    }
+
+    public function brandwisecategoryproduct(Request $request){
+        Paginator::useBootstrap();
+        $cat_id=$request->cat_id;
+        $brand_id=$request->brand_id;
+        if ($cat_id == 0) {
+            $product=Product::where('brand_id', $brand_id)->paginate(9);
+            $product_all=Product::where('brand_id', $brand_id)->get();
+            return view('brand_wise_category', compact('product', 'product_all'));
+        }
+        else{
+            $product=Product::where('brand_id', $brand_id)->where('category_id', $cat_id)->paginate(9);
+            $product_all=Product::where('brand_id', $brand_id)->where('category_id', $cat_id)->get();
+            return view('brand_wise_category', compact('product', 'product_all'));
+        }
+    }
+
+    public function productstore(){
+        Paginator::useBootstrap();
+        $brand=Brand::orderBy('brandname', 'ASC')->get();
+        $category=Category::orderBy('categoryname', 'ASC')->get();
+        $product=Product::orderBy('productname', 'ASC')->paginate(12);
+        $product_all=Product::orderBy('productname', 'ASC')->get();
+        return view('product_store', compact('brand', 'category', 'product', 'product_all'));
+    }
+
+    public function contactus(){
+        $brand=Brand::orderBy('brandname', 'ASC')->get();
+        return view('contact_us', compact('brand'));
+    }
+
+    public function aboutus(){
+        $brand=Brand::orderBy('brandname', 'ASC')->get();
+        return view('about_us', compact('brand'));
     }
 
     public function productdetail($id){
@@ -253,6 +305,14 @@ class FrontendController extends Controller
 
     public function cancelorder($id){
         $orderdetail=Orderdetail::findorfail($id);
+        $quantity = $orderdetail->quantity;
+        $product_id = $orderdetail->product_id;
+
+        $product = Product::findorfail($product_id);
+        $productquantity = $product->productquantity;
+        $sales = $product->sales;
+        $productquantity2 = $quantity + $productquantity;
+        $sales2 = $sales - $quantity;
         if ($orderdetail->status == 'Shipped') {
             $notification = array(
                 'message' => 'Sorry, this product has already shipped',
@@ -263,6 +323,10 @@ class FrontendController extends Controller
         else{
             $orderdetail->status = 'Canceled';
             $orderdetail->save();
+            
+            $product->productquantity = $productquantity2;
+            $product->sales = $sales2;
+            $product->save();
 
             $notification = array(
                 'message' => 'Order successfully canceled',

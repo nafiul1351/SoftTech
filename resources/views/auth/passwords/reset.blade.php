@@ -1,10 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-
     <!-- Verify -->
     <div class="login-area">
         <div class="container">

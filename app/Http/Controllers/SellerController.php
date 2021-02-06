@@ -306,4 +306,40 @@ class SellerController extends Controller
         $orderdetail=Orderdetail::findorfail($id);
         return view('seller.order.view_order', compact('orderdetail'));
     }
+
+    public function packageorder($id){
+        $orderdetail=Orderdetail::findorfail($id);
+        $orderdetail->status = 'Packaged';
+        $orderdetail->save();
+
+        $notification = array(
+            'message' => 'Product successfully Packaged',
+            'alert-type' => 'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
+    public function shiporder($id){
+        $orderdetail=Orderdetail::findorfail($id);
+        $orderdetail->status = 'Shipped';
+        $orderdetail->save();
+
+        $notification = array(
+            'message' => 'Product successfully Shipped',
+            'alert-type' => 'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
+    public function deliverorder($id){
+        $orderdetail=Orderdetail::findorfail($id);
+        $orderdetail->status = 'Delivered';
+        $orderdetail->save();
+
+        $notification = array(
+            'message' => 'Product successfully Delivered',
+            'alert-type' => 'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
 }

@@ -13,22 +13,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\FrontendController::class, 'welcome']);
+Route::get('/', [App\Http\Controllers\FrontendController::class, 'welcome'])->middleware('lscache:max-age=30;public');
 
-Route::get('/search/result', [App\Http\Controllers\FrontendController::class, 'searchresult'])->name('search.result');
+Route::get('/search/result', [App\Http\Controllers\FrontendController::class, 'searchresult'])->name('search.result')->middleware('lscache:max-age=30;public');
 
-Route::get('/product/for/category/{id}', [App\Http\Controllers\FrontendController::class, 'categorywiseproduct']);
+Route::get('/product/for/category/{id}', [App\Http\Controllers\FrontendController::class, 'categorywiseproduct'])->middleware('lscache:max-age=30;public');
 
-Route::get('/product/for/brand/{id}', [App\Http\Controllers\FrontendController::class, 'brandwiseproduct']);
+Route::get('/product/for/category/by/brand', [App\Http\Controllers\FrontendController::class, 'categorywisebrandproduct']);
 
-Route::get('/product/detail/{id}', [App\Http\Controllers\FrontendController::class, 'productdetail']);
+Route::get('/product/for/brand/{id}', [App\Http\Controllers\FrontendController::class, 'brandwiseproduct'])->middleware('lscache:max-age=30;public');
+
+Route::get('/product/for/brand/by/category', [App\Http\Controllers\FrontendController::class, 'brandwisecategoryproduct']);
+
+Route::get('/product/store', [App\Http\Controllers\FrontendController::class, 'productstore'])->name('product.store')->middleware('lscache:max-age=30;public');
+
+Route::get('/contact/us', [App\Http\Controllers\FrontendController::class, 'contactus'])->name('contact.us')->middleware('lscache:max-age=30;public');
+
+Route::get('/about/us', [App\Http\Controllers\FrontendController::class, 'aboutus'])->name('about.us')->middleware('lscache:max-age=30;public');
+
+Route::get('/product/detail/{id}', [App\Http\Controllers\FrontendController::class, 'productdetail'])->middleware('lscache:max-age=30;public');
 
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth','verified'])->group(function () {
 
 	Route::middleware(['admin'])->group(function () {
-		Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminindex'])->name('admin.home');
+		Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminindex'])->name('admin.home')->middleware('lscache:max-age=30;public');
 
 		Route::get('/add/brand', [App\Http\Controllers\AdminController::class, 'addbrand'])->name('add.brand');
 		Route::post('/add/brand', [App\Http\Controllers\AdminController::class, 'storebrand'])->name('add.brand');
@@ -51,10 +61,10 @@ Route::middleware(['auth','verified'])->group(function () {
 	});
 
 	Route::middleware(['seller'])->group(function () {
-		Route::get('not/approved/seller/home', [App\Http\Controllers\HomeController::class, 'notapprovedsellerindex'])->name('not.approved.seller.home');
+		Route::get('not/approved/seller/home', [App\Http\Controllers\HomeController::class, 'notapprovedsellerindex'])->name('not.approved.seller.home')->middleware('lscache:max-age=30;public');
 
 		Route::middleware(['approved'])->group(function () {
-			Route::get('/seller/home', [App\Http\Controllers\HomeController::class, 'sellerindex'])->name('seller.home');
+			Route::get('/seller/home', [App\Http\Controllers\HomeController::class, 'sellerindex'])->name('seller.home')->middleware('lscache:max-age=30;public');
 
 			Route::get('/add/shop', [App\Http\Controllers\SellerController::class, 'addshop'])->name('add.shop');
 			Route::post('/add/shop', [App\Http\Controllers\SellerController::class, 'storeshop'])->name('add.shop');
@@ -73,12 +83,15 @@ Route::middleware(['auth','verified'])->group(function () {
 			Route::get('/seller/processing/order', [App\Http\Controllers\SellerController::class, 'sellerprocessingorder'])->name('seller.processing.order');
 			Route::get('/seller/completed/order', [App\Http\Controllers\SellerController::class, 'sellercompletedorder'])->name('seller.completed.order');
 			Route::get('/seller/canceled/order', [App\Http\Controllers\SellerController::class, 'sellercanceledorder'])->name('seller.canceled.order');
-			Route::get('/seller/view/order/{id}', [App\Http\Controllers\SellerController::class, 'sellervieworder']);
+			Route::get('/seller/view/order/{id}', [App\Http\Controllers\SellerController::class, 'sellervieworder'])->middleware('lscache:max-age=30;public');
+			Route::get('/package/order/{id}', [App\Http\Controllers\SellerController::class, 'packageorder']);
+			Route::get('/ship/order/{id}', [App\Http\Controllers\SellerController::class, 'shiporder']);
+			Route::get('/deliver/order/{id}', [App\Http\Controllers\SellerController::class, 'deliverorder']);
 		});
 	});
 
 	Route::middleware(['buyer'])->group(function () {
-		Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('buyer.home');
+		Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('buyer.home')->middleware('lscache:max-age=30;public');
 
 		Route::get('/add/to/wishlist/{id}', [App\Http\Controllers\FrontendController::class, 'addtowishlist']);
 		Route::get('/show/wishlist', [App\Http\Controllers\FrontendController::class, 'showwishlist'])->name('show.wishlist');
@@ -94,7 +107,7 @@ Route::middleware(['auth','verified'])->group(function () {
 		Route::get('/buyer/processing/order', [App\Http\Controllers\FrontendController::class, 'buyerprocessingorder'])->name('buyer.processing.order');
 		Route::get('/buyer/completed/order', [App\Http\Controllers\FrontendController::class, 'buyercompletedorder'])->name('buyer.completed.order');
 		Route::get('/buyer/canceled/order', [App\Http\Controllers\FrontendController::class, 'buyercanceledorder'])->name('buyer.canceled.order');
-		Route::get('/buyer/view/order/{id}', [App\Http\Controllers\FrontendController::class, 'buyervieworder']);
+		Route::get('/buyer/view/order/{id}', [App\Http\Controllers\FrontendController::class, 'buyervieworder'])->middleware('lscache:max-age=30;public');
 		Route::get('/cancel/order/{id}', [App\Http\Controllers\FrontendController::class, 'cancelorder']);
 
 		Route::post('/submit/review/{id}', [App\Http\Controllers\FrontendController::class, 'submitreview']);

@@ -107,7 +107,7 @@
     </div>
 
     <!-- Hot Deal -->
-    <div id="hot-deal" class="section">
+    <div id="hot-deal" class="section" style="background-image: url({{asset('/public/images/hotdeal.jpg')}}); background-size: cover;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -115,32 +115,32 @@
                         <ul class="hot-deal-countdown">
                             <li>
                                 <div>
-                                    <h3>02</h3>
-                                    <span>Days</span>
+                                    <h3>{{ __('02') }}</h3>
+                                    <span>{{ __('Days') }}</span>
                                 </div>
                             </li>
                             <li>
                                 <div>
-                                    <h3>10</h3>
-                                    <span>Hours</span>
+                                    <h3>{{ __('10') }}</h3>
+                                    <span>{{ __('Hours') }}</span>
                                 </div>
                             </li>
                             <li>
                                 <div>
-                                    <h3>34</h3>
-                                    <span>Mins</span>
+                                    <h3>{{ __('34') }}</h3>
+                                    <span>{{ __('Mins') }}</span>
                                 </div>
                             </li>
                             <li>
                                 <div>
-                                    <h3>60</h3>
-                                    <span>Secs</span>
+                                    <h3>{{ __('60') }}</h3>
+                                    <span>{{ __('Secs') }}</span>
                                 </div>
                             </li>
                         </ul>
-                        <h2 class="text-uppercase">hot deal this week</h2>
-                        <p>New Collection Up to 50% OFF</p>
-                        <a class="primary-btn cta-btn" href="#">Shop now</a>
+                        <h2 class="text-uppercase" style="color: #C10425;">{{ __('hot deal this week') }}</h2>
+                        <p style="color: #C10425;">{{ __('New Collection Up to 50% OFF') }}</p>
+                        <a class="primary-btn cta-btn" href="#">{{ __('Shop now') }}</a>
                     </div>
                 </div>
             </div>

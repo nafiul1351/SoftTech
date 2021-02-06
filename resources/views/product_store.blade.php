@@ -11,26 +11,26 @@
 				<div class="col-md-12">
 					<ul class="breadcrumb-tree">
 						<li><a href="{{ URL::to('/') }}">{{ __('Home') }}</a></li>
-						<li><a href="">{{ __('Wishlist') }}</a></li>
-						<li class="active">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</li>
+                        <li><a href="">{{ __('Product') }}</a></li>
+						<li class="active">{{ __('Store') }}</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 
-    <!-- Wishlists -->
+    <!-- Search Results -->
     <div class="section">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h3 class="title">{{ __('Wishlist for ') }}{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h3>
+                        <h3 class="title">{{ __('All Products') }}</h3>
                     </div>
                 </div>
                 <div id="store" class="col-md-12">
                 	@if($product->count() == 0)
-	                	<h5 class="title">{{ __('Your wishlist is empty. Please add some products to your wishlist.') }}</h5>
+	                	<h5 class="title">{{ __('Sorry, no products are available right now. Please check back leter.') }}</h5>
 	                @endif
                		<div class="row">
                			@foreach($product as $prdct)
@@ -82,11 +82,11 @@
                         @endforeach
                     </div>
 					<div class="store-filter clearfix">
-                        <span class="store-qty">
-                            {{ __('Showing ') }}{{$product->count()}}{{ __(' of ') }}{{$product_all->count()}}{{ __(' products') }}
-                        </span>
-                        {{$product->links('partials.pagination')}}
-                    </div>
+						<span class="store-qty">
+	                		{{ __('Showing ') }}{{$product->count()}}{{ __(' of ') }}{{$product_all->count()}}{{ __(' products') }}
+	            		</span>
+						{{$product->links('partials.pagination')}}
+					</div>
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@
 
     <!-- Footer -->
     @include('partials.frontend.footer')
-    
+
 @endsection
 
 @section('scripts')
