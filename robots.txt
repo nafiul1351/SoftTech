@@ -1,2 +1,3 @@
+Sitemap: https://www.softtech.mdnafiulislam.com/images_sitemap.xml
 User-agent: *
 Disallow:
